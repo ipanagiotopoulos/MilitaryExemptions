@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:th="http://www.thymeleaf.org"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      layout:decorate="~{base}">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+    <title>Add User</title>
+</head>
+<body>
+<div layout:fragment="page_content" id="page_content">
+    <div class="card">
+        <div class="card-body">
+            <h5 class="card-title">Add User</h5>
+            <form id="myForm" action="/admin/users/new"
+                  th:object="${user}" method="post" class="grid-container">
+                <div class="row">
+
+                    <div class="col-12 col-md-6">
+                        <label class="form-label">Username :</label>
+                        <input th:field="*{username}"
+                               type="text" name="username" class="form-control"
+                               placeholder="Username" required="required"
+                               th:classappend="${not #lists.isEmpty(#fields.errors('username'))} ? is-invalid-input "
+                        />
+                        <span class="form-error is-visible">
+                        <p th:each="error: ${#fields.errors('username')}" th:text="${error}">Invalid data</p>
+                    </span>
+                    </div>
+                    <div class="col-12 col-md-6">
+                        <label class="form-label">First Name :</label>
+                        <input th:field="*{firstName}"
+                               type="text" name="firstName" class="form-control"
+                               placeholder="First Name" required="required"
+                               th:classappend="${not #lists.isEmpty(#fields.errors('firstName'))} ? is-invalid-input  "
+                        />
+                        <span class="form-error is-visible">
+                        <p th:each="error: ${#fields.errors('firstName')}" th:text="${error}">Invalid data</p>
+                    </span>
+                    </div>
+                </div>
+                <div class="row">
+
+                <div class="col-12 col-md-6">
+                        <label class="form-label">Last Name :</label>
+                        <input th:field="*{lastName}"
+                               type="text" name="lastName" class="form-control"
+                               placeholder="Last Name" required="required"
+                               th:classappend="${not #lists.isEmpty(#fields.errors('lastName'))} ? is-invalid-input  "
+                        />
+                        <span class="form-error is-visible">
+                        <p th:each="error: ${#fields.errors('lastName')}" th:text="${error}">Invalid data</p>
+                    </span>
+                    </div>
+                    <div class="col-12 col-md-6">
+                        <label class="form-label">Password :</label>
+                        <input th:field="*{password}"
+                               type="password" name="password" class="form-control"
+                               placeholder="Password" required="required"
+                               th:classappend="${not #lists.isEmpty(#fields.errors('password'))} ? is-invalid-input  "
+                        />
+                        <span class="form-error is-visible">
+                        <p th:each="error: ${#fields.errors('password')}" th:text="${error}">Invalid data</p>
+                    </span>
+                    </div>
+                </div>
+                <div class="row">
+
+                <div class="col-12">
+                        <label class="form-label">Confirm Password :</label>
+                        <input th:field="*{confirmPassword}"
+                               type="password" name="confirmPassword" class="form-control"
+                               placeholder="Confirm Password" required="required"
+                               th:classappend="${not #lists.isEmpty(#fields.errors('confirmPassword'))} ? is-invalid-input  "
+                        />
+                        <span class="form-error is-visible">
+                        <p th:each="error: ${#fields.errors('confirmPassword')}" th:text="${error}">Invalid data</p>
+                    </span>
+                    </div>
+                </div>
+                <div class="row">
+
+                <div class="col-12">
+                        <label class="form-label">Roles :</label>
+                        <select class="form-control" th:field="*{role}" required>
+                            <option value="ROLE_ADMIN">ADMIN</option>
+                            <option value="ROLE_CITIZEN">CITIZEN</option>
+                            <option value="ROLE_OFFICER">OFFICER</option>
+                            <option value="ROLE_EMPLOYEE">EMPLOYEE</option>
+                        </select>
+                    </div>
+                </div>
+                <br>
+                <button type="submit" class="btn btn-secondary">Submit</button>
+
+            </form>
+        </div>
+    </div>
+</div>
+</body>
+</html>
